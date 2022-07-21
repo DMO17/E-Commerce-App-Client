@@ -20,9 +20,10 @@ export const Pay = () => {
       });
 
       console.log(data);
+      navigate("/success");
     };
     stripeToken && makeRequest();
-  }, [stripeToken]);
+  }, [stripeToken, navigate]);
 
   return (
     <>
@@ -65,14 +66,6 @@ export const Pay = () => {
           </div>
         </StripeCheckout>
       )}
-
-      <button
-        onClick={() => {
-          navigate("/success");
-        }}
-      >
-        click me
-      </button>
     </>
   );
 };
