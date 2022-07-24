@@ -5,6 +5,7 @@ import { Success } from "./components/Success";
 import { Cart } from "./pages/Cart";
 import { Home } from "./pages/Home";
 import { Product } from "./pages/Product";
+import { ProductList } from "./pages/ProductList";
 import { SignUp } from "./pages/SignUp";
 
 export const AppRouter = () => {
@@ -15,7 +16,8 @@ export const AppRouter = () => {
       <Route path="/login" element={<LoginForm />} />;
       <Route path="/register" element={<SignUp />} />;
       <Route path="/cart" element={<Cart />} />;
-      <Route path="/product" element={<Product />} />;
+      <Route path="/product/:id" element={<Product />} />;
+      <Route path="/products" element={<ProductList />} />;
       <Route path="/" element={<Home />} />;
     </Routes>
   );
