@@ -1,11 +1,11 @@
 import styled from "styled-components";
-import { mobile } from "../../responsive";
+import { mobile, tablet } from "../../responsive";
 import { Badge } from "@material-ui/core";
 import { Search, ShoppingCartOutlined } from "@material-ui/icons";
 
 const Container = styled.div`
   height: 60px;
-  ${mobile({ height: "50px" })}
+  ${tablet({ height: "100px" })}
 `;
 
 const Wrapper = styled.div`

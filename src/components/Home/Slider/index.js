@@ -1,6 +1,6 @@
 import styled from "styled-components";
-import { sliderItems } from "../../data";
-import { mobile } from "../../responsive";
+import { sliderItems } from "../../../data";
+import { tablet } from "../../../responsive";
 
 const Container = styled.div`
   width: 100%;
@@ -8,7 +8,6 @@ const Container = styled.div`
   display: flex;
   position: relative;
   overflow: hidden;
-  ${mobile({ display: "none" })}
 `;
 
 const Wrapper = styled.div`
@@ -29,10 +28,12 @@ const Slide = styled.div`
 const ImgContainer = styled.div`
   height: 100%;
   flex: 1;
+  ${tablet({ display: "none" })}
 `;
 
 const Image = styled.img`
   height: 80%;
+  width: 90%;
 `;
 
 const InfoContainer = styled.div`
@@ -58,13 +59,13 @@ const Button = styled.button`
   cursor: pointer;
 `;
 
-const Slider = () => {
+export const Slider = () => {
   return (
     <Container>
       <Wrapper>
         <Slide bg={sliderItems[0].bg} key={sliderItems[0].id}>
           <ImgContainer>
-            <Image src={sliderItems[0].img} />
+            <Image src={sliderItems[1].img} />
           </ImgContainer>
           <InfoContainer>
             <Title>{sliderItems[0].title}</Title>
@@ -76,5 +77,3 @@ const Slider = () => {
     </Container>
   );
 };
-
-export default Slider;

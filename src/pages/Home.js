@@ -1,14 +1,15 @@
 import { Announcement } from "../components/Announcement";
-import { Categories } from "../components/Categories";
+import { Categories } from "../components/Home/Categories";
 import { Footer } from "../components/Footer";
 import { NavBar } from "../components/NavBar";
 import { Newsletter } from "../components/Newsletter";
 import { Products } from "../components/Products";
-import Slider from "../components/Slider";
+import { Slider } from "../components/Home/Slider";
+import { Fragment } from "react";
 
 export const Home = () => {
   return (
-    <div>
+    <Fragment>
       <Announcement />
       <NavBar />
       <Slider />
@@ -16,6 +17,6 @@ export const Home = () => {
       <Products />
       <Newsletter />
       <Footer />
-    </div>
+    </Fragment>
   );
 };
