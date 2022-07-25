@@ -2,6 +2,8 @@ import styled from "styled-components";
 import { mobile, tablet } from "../../responsive";
 import Badge from "@material-ui/core/Badge";
 import { Search, ShoppingCartOutlined } from "@material-ui/icons";
+import { useAuth } from "../../context/AppProvider";
+import { useNavigate } from "react-router-dom";
 
 const Container = styled.div`
   height: 60px;
@@ -47,6 +49,7 @@ const Center = styled.div`
 `;
 
 const Logo = styled.h1`
+  cursor: pointer;
   font-weight: bold;
   ${mobile({ fontSize: "24px" })}
 `;
@@ -66,6 +69,10 @@ const MenuItem = styled.div`
 `;
 
 export const NavBar = () => {
+  const { isLoggedIn } = useAuth();
+
+  const navigate = useNavigate();
+
   return (
     <Container>
       <Wrapper>
@@ -77,16 +84,32 @@ export const NavBar = () => {
           </SearchContainer>
         </Left>
         <Center>
-          <Logo>SHOP FUN </Logo>
+          <Logo onClick={() => navigate("../", { replace: true })}>
+            SHOP FUN
+          </Logo>
         </Center>
         <Right>
-          <MenuItem>REGISTER</MenuItem>
-          <MenuItem>SIGN IN</MenuItem>
-          <MenuItem>
-            <Badge overlap="rectangular" badgeContent={4} color="primary">
-              <ShoppingCartOutlined />
-            </Badge>
-          </MenuItem>
+          {!isLoggedIn && (
+            <>
+              <MenuItem
+                onClick={() => navigate("../register", { replace: true })}
+              >
+                REGISTER
+              </MenuItem>
+              <MenuItem onClick={() => navigate("../login", { replace: true })}>
+                SIGN IN
+              </MenuItem>
+            </>
+          )}
+          {isLoggedIn && (
+            <MenuItem>
+              <Badge overlap="rectangular" badgeContent={4} color="primary">
+                <ShoppingCartOutlined
+                  onClick={() => navigate("../cart", { replace: true })}
+                />
+              </Badge>
+            </MenuItem>
+          )}
         </Right>
       </Wrapper>
     </Container>
