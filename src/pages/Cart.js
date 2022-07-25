@@ -1,10 +1,10 @@
 import styled from "styled-components";
-import { Announcement } from "../components/Announcement";
+
 import { CartHeader } from "../components/Cart/CartHeader";
 import { CartProduct } from "../components/Cart/CartProduct";
 import { CartSummary } from "../components/Cart/CartSummary";
 import { Footer } from "../components/Footer";
-import { NavBar } from "../components/NavBar";
+
 import { tablet } from "../responsive";
 
 const Container = styled.div``;
@@ -27,8 +27,6 @@ const Info = styled.div`
 export const Cart = () => {
   return (
     <Container>
-      <Announcement />
-      <NavBar />
       <Wrapper>
         <CartHeader />
         <Bottom>
