@@ -65,7 +65,7 @@ export const Slider = () => {
       <Wrapper>
         <Slide bg={sliderItems[0].bg} key={sliderItems[0].id}>
           <ImgContainer>
-            <Image src={sliderItems[1].img} />
+            <Image src={sliderItems[0].img} />
           </ImgContainer>
           <InfoContainer>
             <Title>{sliderItems[0].title}</Title>

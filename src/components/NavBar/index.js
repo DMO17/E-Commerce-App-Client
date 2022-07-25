@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { mobile, tablet } from "../../responsive";
-import { Badge } from "@material-ui/core";
+import Badge from "@material-ui/core/Badge";
 import { Search, ShoppingCartOutlined } from "@material-ui/icons";
 
 const Container = styled.div`
@@ -83,7 +83,7 @@ export const NavBar = () => {
           <MenuItem>REGISTER</MenuItem>
           <MenuItem>SIGN IN</MenuItem>
           <MenuItem>
-            <Badge badgeContent={4} color="primary">
+            <Badge overlap="rectangular" badgeContent={4} color="primary">
               <ShoppingCartOutlined />
             </Badge>
           </MenuItem>
