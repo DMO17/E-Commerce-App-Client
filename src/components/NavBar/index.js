@@ -102,11 +102,9 @@ export const NavBar = () => {
             </>
           )}
           {isLoggedIn && (
-            <MenuItem>
+            <MenuItem onClick={() => navigate("../cart", { replace: true })}>
               <Badge overlap="rectangular" badgeContent={4} color="primary">
-                <ShoppingCartOutlined
-                  onClick={() => navigate("../cart", { replace: true })}
-                />
+                <ShoppingCartOutlined />
               </Badge>
             </MenuItem>
           )}
