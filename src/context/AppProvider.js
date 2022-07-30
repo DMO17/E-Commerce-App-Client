@@ -16,7 +16,9 @@ export const AppProvider = ({ children }) => {
   useEffect(() => {
     const fetchProducts = async () => {
       const { data } = await axios.get("/products");
-      data?.products && setProducts(data.products);
+
+      data?.products &&
+        setProducts(data?.products?.sort(() => Math.random() - 0.5));
     };
 
     fetchProducts();

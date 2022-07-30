@@ -1,6 +1,6 @@
 import styled from "styled-components";
+import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../context/AppProvider";
-import { popularProducts } from "../../data";
 import { Product } from "../Product";
 
 const Container = styled.div`
@@ -13,10 +13,19 @@ const Container = styled.div`
 export const Products = () => {
   const { products } = useAuth();
 
+  let navigate = useNavigate();
+
+  const navigateToItemPage = (id) =>
+    navigate(`../products/${id}`, { replace: true });
+
   return (
     <Container>
       {products.map((item) => (
-        <Product item={item} key={item.id} />
+        <Product
+          item={item}
+          navigateToItemPage={navigateToItemPage}
+          key={item._id}
+        />
       ))}
     </Container>
   );

@@ -1,18 +1,16 @@
-import {
-  FavoriteBorderOutlined,
-  SearchOutlined,
-  ShoppingCartOutlined,
-} from "@material-ui/icons";
+import { FavoriteBorderOutlined, SearchOutlined } from "@material-ui/icons";
 import styled from "styled-components";
 
 const Title = styled.h4`
   font-weight: 150;
-  text-align: center; ;
+  text-align: center;
+  margin-bottom: 15px;
 `;
 
 const Price = styled.span`
   font-weight: 100;
   font-size: 30px;
+  margin-top: 15px;
 `;
 
 const Info = styled.div`
@@ -34,8 +32,8 @@ const Info = styled.div`
 const Container = styled.div`
   flex: 1;
   margin: 5px;
-  min-width: 280px;
-  height: 350px;
+  min-width: 330px;
+  height: 450px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -68,17 +66,14 @@ const Icon = styled.div`
   }
 `;
 
-export const Product = ({ item }) => {
+export const Product = ({ item, navigateToItemPage }) => {
   return (
-    <Container>
+    <Container id={item?._id}>
       <Title>{item?.title}</Title>
       <Image src={item?.img} />
       <Info>
         <Icon>
-          <ShoppingCartOutlined />
-        </Icon>
-        <Icon>
-          <SearchOutlined />
+          <SearchOutlined onClick={() => navigateToItemPage(item?._id)} />
         </Icon>
         <Icon>
           <FavoriteBorderOutlined />

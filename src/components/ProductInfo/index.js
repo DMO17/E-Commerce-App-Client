@@ -1,5 +1,10 @@
 import { Add, Remove } from "@material-ui/icons";
+import { useState } from "react";
 import styled from "styled-components";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
+
+import { useAuth } from "../../context/AppProvider";
 import { mobile } from "../../responsive";
 
 const Wrapper = styled.div`
@@ -99,26 +104,47 @@ const Button = styled.button`
   }
 `;
 
-export const ProductInfo = () => {
+export const ProductInfo = ({ product, productId }) => {
+  const { user, accessToken } = useAuth();
+  const navigate = useNavigate();
+
+  const [size, setSize] = useState("XS");
+  const [quantity, setQuantity] = useState(1);
+
+  const addProductToCart = async () => {
+    if (user) {
+      const { data } = await axios.put(
+        `/cart/${user?._id}`,
+        {
+          size,
+          productId,
+          quantity,
+        },
+        {
+          headers: { authorization: `Bearer ${accessToken}` },
+        }
+      );
+      data.success && navigate("../cart", { replace: true });
+    } else navigate("../login", { replace: true });
+  };
+
   return (
     <Wrapper>
       <ImgContainer>
-        <Image src="https://cdn.shopify.com/s/files/1/0626/0614/7836/products/Sorbtek_365_Medium_Moziah_comp.jpg?v=1645314952" />
+        <Image src={product?.img} />
       </ImgContainer>
       <InfoContainer>
-        <Title>Denim Jumpsuit</Title>
-        <Desc>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec
-          venenatis, dolor in finibus malesuada, lectus ipsum porta nunc, at
-          iaculis arcu nisi sed mauris. Nulla fermentum vestibulum ex, eget
-          tristique tortor pretium ut. Curabitur elit justo, consequat id
-          condimentum ac, volutpat ornare.
-        </Desc>
-        <Price>$ 20</Price>
+        <Title>{product?.title}</Title>
+        <Desc>{product?.description}</Desc>
+        <Price>$ {product?.price}</Price>
         <FilterContainer>
           <Filter>
             <FilterTitle>Size</FilterTitle>
-            <FilterSize>
+            <FilterSize
+              onChange={(e) => {
+                setSize(e.target.value);
+              }}
+            >
               <FilterSizeOption>XS</FilterSizeOption>
               <FilterSizeOption>S</FilterSizeOption>
               <FilterSizeOption>M</FilterSizeOption>
@@ -129,11 +155,17 @@ export const ProductInfo = () => {
         </FilterContainer>
         <AddContainer>
           <AmountContainer>
-            <Remove />
-            <Amount>1</Amount>
-            <Add />
+            <Remove
+              style={{ cursor: "pointer" }}
+              onClick={() => setQuantity((prevState) => prevState - 1)}
+            />
+            <Amount>{quantity}</Amount>
+            <Add
+              style={{ cursor: "pointer" }}
+              onClick={() => setQuantity((prevState) => prevState + 1)}
+            />
           </AmountContainer>
-          <Button>ADD TO CART</Button>
+          <Button onClick={addProductToCart}>ADD TO CART</Button>
         </AddContainer>
       </InfoContainer>
     </Wrapper>

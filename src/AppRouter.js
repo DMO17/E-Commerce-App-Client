@@ -20,7 +20,7 @@ export const AppRouter = () => {
           <Route path="/login" element={<LoginForm />} />;
           <Route path="/register" element={<SignUp />} />;
           <Route path="/cart" element={<Cart />} />;
-          <Route path="/product/:id" element={<Product />} />;
+          <Route path="/products/:productId" element={<Product />} />;
           <Route path="/products" element={<ProductList />} />;
           <Route path="/" element={<Home />} />;
           <Route path="*" element={<Navigate to="/" />} />
@@ -30,7 +30,7 @@ export const AppRouter = () => {
         <>
           <Route path="/login" element={<LoginForm />} />;
           <Route path="/register" element={<SignUp />} />;
-          <Route path="/products/:id" element={<Product />} />;
+          <Route path="/products/:productId" element={<Product />} />;
           <Route path="/products" element={<ProductList />} />;
           <Route path="/" element={<Home />} />;
           <Route path="*" element={<Navigate to="/" />} />
