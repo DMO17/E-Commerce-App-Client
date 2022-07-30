@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { useAuth } from "../../context/AppProvider";
 import { popularProducts } from "../../data";
 import { Product } from "../Product";
 
@@ -10,9 +11,11 @@ const Container = styled.div`
 `;
 
 export const Products = () => {
+  const { products } = useAuth();
+
   return (
     <Container>
-      {popularProducts.map((item) => (
+      {products.map((item) => (
         <Product item={item} key={item.id} />
       ))}
     </Container>

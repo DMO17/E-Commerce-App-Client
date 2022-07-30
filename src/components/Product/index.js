@@ -5,6 +5,16 @@ import {
 } from "@material-ui/icons";
 import styled from "styled-components";
 
+const Title = styled.h4`
+  font-weight: 150;
+  text-align: center; ;
+`;
+
+const Price = styled.span`
+  font-weight: 100;
+  font-size: 30px;
+`;
+
 const Info = styled.div`
   opacity: 0;
   width: 100%;
@@ -27,6 +37,7 @@ const Container = styled.div`
   min-width: 280px;
   height: 350px;
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
   background-color: #f5fbfd;
@@ -34,14 +45,6 @@ const Container = styled.div`
   &:hover ${Info} {
     opacity: 1;
   }
-`;
-
-const Circle = styled.div`
-  width: 200px;
-  height: 200px;
-  border-radius: 50%;
-  background-color: white;
-  position: absolute;
 `;
 
 const Image = styled.img`
@@ -68,8 +71,8 @@ const Icon = styled.div`
 export const Product = ({ item }) => {
   return (
     <Container>
-      <Circle />
-      <Image src={item.img} />
+      <Title>{item?.title}</Title>
+      <Image src={item?.img} />
       <Info>
         <Icon>
           <ShoppingCartOutlined />
@@ -81,6 +84,7 @@ export const Product = ({ item }) => {
           <FavoriteBorderOutlined />
         </Icon>
       </Info>
+      <Price>£{item?.price}</Price>
     </Container>
   );
 };
