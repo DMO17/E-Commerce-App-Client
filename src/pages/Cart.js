@@ -1,4 +1,7 @@
+import { useEffect, useState } from "react";
 import styled from "styled-components";
+import axios from "axios";
+import { useAuth } from "../context/AppProvider";
 
 import { CartHeader } from "../components/Cart/CartHeader";
 import { CartProduct } from "../components/Cart/CartProduct";
@@ -25,20 +28,36 @@ const Info = styled.div`
 `;
 
 export const Cart = () => {
+  const { user, accessToken } = useAuth();
+
+  const [cart, setCart] = useState([]);
+
+  useEffect(() => {
+    const fetchCart = async () => {
+      const { data } = await axios.get(`/cart/${user?._id}`, {
+        headers: { authorization: `Bearer ${accessToken}` },
+      });
+      data?.success && setCart(data?.cart);
+    };
+
+    fetchCart();
+  }, [user?._id, accessToken]);
+
+  const totalCartAmount = Object.values(cart)[2].reduce((total, item) => {
+    return item?.quantity * item?.productId?.price + total;
+  }, 0);
+
   return (
     <Container>
       <Wrapper>
         <CartHeader />
         <Bottom>
           <Info>
-            <CartProduct />
-            <CartProduct />
-            <CartProduct />
-            <CartProduct />
-            <CartProduct />
-            <CartProduct />
+            {cart?.products?.map((item) => (
+              <CartProduct item={item} />
+            ))}
           </Info>
-          <CartSummary />
+          <CartSummary totalCartAmount={totalCartAmount} />
         </Bottom>
       </Wrapper>
       <Footer />

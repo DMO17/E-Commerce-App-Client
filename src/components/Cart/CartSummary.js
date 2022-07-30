@@ -32,25 +32,25 @@ const Button = styled.button`
   font-weight: 600;
 `;
 
-export const CartSummary = () => {
+export const CartSummary = ({ totalCartAmount }) => {
   return (
     <Summary>
       <SummaryTitle>ORDER SUMMARY</SummaryTitle>
       <SummaryItem>
         <SummaryItemText>Subtotal</SummaryItemText>
-        <SummaryItemPrice>$ 80</SummaryItemPrice>
+        <SummaryItemPrice>£ {totalCartAmount}</SummaryItemPrice>
       </SummaryItem>
       <SummaryItem>
         <SummaryItemText>Estimated Shipping</SummaryItemText>
-        <SummaryItemPrice>$ 5.90</SummaryItemPrice>
+        <SummaryItemPrice>£ 5.90</SummaryItemPrice>
       </SummaryItem>
       <SummaryItem>
         <SummaryItemText>Shipping Discount</SummaryItemText>
-        <SummaryItemPrice>$ -5.90</SummaryItemPrice>
+        <SummaryItemPrice>£ -5.90</SummaryItemPrice>
       </SummaryItem>
       <SummaryItem type="total">
         <SummaryItemText>Total</SummaryItemText>
-        <SummaryItemPrice>$ 80</SummaryItemPrice>
+        <SummaryItemPrice>£ {totalCartAmount}</SummaryItemPrice>
       </SummaryItem>
       <Button>CHECKOUT NOW</Button>
     </Summary>

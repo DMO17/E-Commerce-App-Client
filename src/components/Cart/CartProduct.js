@@ -1,4 +1,4 @@
-import { Fragment } from "react";
+import { Fragment, useState } from "react";
 import styled from "styled-components";
 import { Add, Remove } from "@material-ui/icons";
 import { tablet } from "../../responsive";
@@ -16,6 +16,7 @@ const ProductDetail = styled.div`
 
 const Image = styled.img`
   width: 200px;
+  height: 200px;
 `;
 
 const Details = styled.div`
@@ -70,32 +71,39 @@ const Hr = styled.hr`
   height: 1px;
 `;
 
-export const CartProduct = () => {
+export const CartProduct = ({ item }) => {
+  const [quantity, setQuantity] = useState(item?.quantity);
   return (
     <Fragment>
       <Product>
         <ProductDetail>
-          <Image src="https://hips.hearstapps.com/vader-prod.s3.amazonaws.com/1614188818-TD1MTHU_SHOE_ANGLE_GLOBAL_MENS_TREE_DASHERS_THUNDER_b01b1013-cd8d-48e7-bed9-52db26515dc4.png?crop=1xw:1.00xh;center,top&resize=480%3A%2A" />
+          <Image src={item?.productId?.img} />
           <Details>
-            <ProductName>
-              <b>Product:</b> JESSIE THUNDER SHOES
-            </ProductName>
             <ProductId>
-              <b>ID:</b> 93813718293
+              <b>ID:</b> 123456
             </ProductId>
-            <ProductColor color="black" />
+            <ProductName>
+              <b>Product:</b> {item?.productId?.title}
+            </ProductName>
+            <ProductColor color={item?.productId?.color} />
             <ProductSize>
-              <b>Size:</b> 37.5
+              <b>Size:</b> {item?.size}
             </ProductSize>
           </Details>
         </ProductDetail>
         <PriceDetail>
           <ProductAmountContainer>
-            <Add />
-            <ProductAmount>2</ProductAmount>
-            <Remove />
+            <Add
+              style={{ cursor: "pointer" }}
+              onClick={() => setQuantity((prevState) => prevState + 1)}
+            />
+            <ProductAmount>{quantity}</ProductAmount>
+            <Remove
+              style={{ cursor: "pointer" }}
+              onClick={() => setQuantity((prevState) => prevState - 1)}
+            />
           </ProductAmountContainer>
-          <ProductPrice>$ 30</ProductPrice>
+          <ProductPrice>£{item?.productId?.price}</ProductPrice>
         </PriceDetail>
       </Product>
       <Hr />
