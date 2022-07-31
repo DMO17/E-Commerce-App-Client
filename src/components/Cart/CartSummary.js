@@ -1,5 +1,7 @@
 import styled from "styled-components";
 
+import { Pay } from "../Pay";
+
 const Summary = styled.div`
   flex: 1;
   border: 0.5px solid lightgray;
@@ -24,14 +26,6 @@ const SummaryItemText = styled.span``;
 
 const SummaryItemPrice = styled.span``;
 
-const Button = styled.button`
-  width: 100%;
-  padding: 10px;
-  background-color: black;
-  color: white;
-  font-weight: 600;
-`;
-
 export const CartSummary = ({ totalCartAmount }) => {
   return (
     <Summary>
@@ -52,7 +46,7 @@ export const CartSummary = ({ totalCartAmount }) => {
         <SummaryItemText>Total</SummaryItemText>
         <SummaryItemPrice>£ {totalCartAmount}</SummaryItemPrice>
       </SummaryItem>
-      <Button>CHECKOUT NOW</Button>
+      <Pay totalCartAmount={totalCartAmount} />
     </Summary>
   );
 };

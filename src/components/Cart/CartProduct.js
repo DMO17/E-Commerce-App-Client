@@ -1,6 +1,6 @@
 import { Fragment, useState } from "react";
 import styled from "styled-components";
-import { Add, Remove } from "@material-ui/icons";
+import { Add, Remove, Delete } from "@material-ui/icons";
 import { tablet } from "../../responsive";
 
 const Product = styled.div`
@@ -27,8 +27,6 @@ const Details = styled.div`
 `;
 
 const ProductName = styled.span``;
-
-const ProductId = styled.span``;
 
 const ProductColor = styled.div`
   width: 20px;
@@ -71,17 +69,22 @@ const Hr = styled.hr`
   height: 1px;
 `;
 
-export const CartProduct = ({ item }) => {
+export const CartProduct = ({ item, deleteItemFromCart, setRefetch }) => {
   const [quantity, setQuantity] = useState(item?.quantity);
+
   return (
     <Fragment>
       <Product>
         <ProductDetail>
           <Image src={item?.productId?.img} />
           <Details>
-            <ProductId>
-              <b>ID:</b> 123456
-            </ProductId>
+            <Delete
+              style={{ cursor: "pointer" }}
+              onClick={() => {
+                deleteItemFromCart(item?._id);
+                setRefetch((prevState) => prevState + 1);
+              }}
+            />
             <ProductName>
               <b>Product:</b> {item?.productId?.title}
             </ProductName>

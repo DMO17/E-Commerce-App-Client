@@ -31,6 +31,7 @@ export const Cart = () => {
   const { user, accessToken } = useAuth();
 
   const [cart, setCart] = useState([]);
+  const [refetch, setRefetch] = useState(2);
 
   useEffect(() => {
     const fetchCart = async () => {
@@ -41,11 +42,23 @@ export const Cart = () => {
     };
 
     fetchCart();
-  }, [user?._id, accessToken]);
+  }, [user?._id, accessToken, refetch]);
 
-  const totalCartAmount = Object.values(cart)[2].reduce((total, item) => {
+  console.log(refetch);
+
+  const totalCartAmount = Object.values(cart)[2]?.reduce((total, item) => {
     return item?.quantity * item?.productId?.price + total;
   }, 0);
+
+  const deleteItemFromCart = async (id) => {
+    await axios.put(
+      `/cart/delete/${user?._id}`,
+      { cartProductId: id },
+      {
+        headers: { authorization: `Bearer ${accessToken}` },
+      }
+    );
+  };
 
   return (
     <Container>
@@ -54,7 +67,12 @@ export const Cart = () => {
         <Bottom>
           <Info>
             {cart?.products?.map((item) => (
-              <CartProduct item={item} />
+              <CartProduct
+                item={item}
+                deleteItemFromCart={deleteItemFromCart}
+                setRefetch={setRefetch}
+                key={item?._id}
+              />
             ))}
           </Info>
           <CartSummary totalCartAmount={totalCartAmount} />
