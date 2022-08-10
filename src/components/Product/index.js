@@ -1,5 +1,6 @@
-import { FavoriteBorderOutlined, SearchOutlined } from "@material-ui/icons";
 import styled from "styled-components";
+import { BsSearch } from "react-icons/bs";
+import { AiOutlineHeart } from "react-icons/ai";
 
 const Title = styled.h4`
   font-weight: 150;
@@ -73,10 +74,10 @@ export const Product = ({ item, navigateToItemPage }) => {
       <Image src={item?.img} />
       <Info>
         <Icon>
-          <SearchOutlined onClick={() => navigateToItemPage(item?._id)} />
+          <BsSearch onClick={() => navigateToItemPage(item?._id)} />
         </Icon>
         <Icon>
-          <FavoriteBorderOutlined />
+          <AiOutlineHeart style={{ fontSize: 25 }} />
         </Icon>
       </Info>
       <Price>£{item?.price}</Price>

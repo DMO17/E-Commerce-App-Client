@@ -1,8 +1,9 @@
 import styled from "styled-components";
 import { mobile, tablet } from "../../responsive";
-import Badge from "@material-ui/core/Badge";
+import Badge from "@mui/material/Badge";
 import { FiLogOut } from "react-icons/fi";
-import { Search, ShoppingCartOutlined } from "@material-ui/icons";
+import { BsSearch } from "react-icons/bs";
+import { AiOutlineShoppingCart } from "react-icons/ai";
 import { useAuth } from "../../context/AppProvider";
 import { useNavigate } from "react-router-dom";
 
@@ -88,7 +89,7 @@ export const NavBar = () => {
           <Language>EN</Language>
           <SearchContainer>
             <Input placeholder="Search" />
-            <Search style={{ color: "gray", fontSize: 16 }} />
+            <BsSearch style={{ color: "gray", fontSize: 16 }} />
           </SearchContainer>
         </Left>
         <Center>
@@ -113,11 +114,11 @@ export const NavBar = () => {
             <>
               <MenuItem onClick={() => navigate("../cart", { replace: true })}>
                 <Badge
+                  color="primary"
                   overlap="rectangular"
                   badgeContent={productsInCart.length}
-                  color="primary"
                 >
-                  <ShoppingCartOutlined />
+                  <AiOutlineShoppingCart style={{ fontSize: 30 }} />
                 </Badge>
               </MenuItem>
               <FiLogOut

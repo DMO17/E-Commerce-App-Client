@@ -1,7 +1,9 @@
 import { Fragment, useState } from "react";
 import styled from "styled-components";
-import { Add, Remove, Delete } from "@material-ui/icons";
 import { tablet } from "../../responsive";
+import { AiOutlinePlus } from "react-icons/ai";
+import { AiOutlineMinus } from "react-icons/ai";
+import { AiFillDelete } from "react-icons/ai";
 
 const Product = styled.div`
   display: flex;
@@ -87,8 +89,8 @@ export const CartProduct = ({
             onClick={() => navigateToProductOnClick(item?.productId?._id)}
           />
           <Details>
-            <Delete
-              style={{ cursor: "pointer" }}
+            <AiFillDelete
+              style={{ cursor: "pointer", fontSize: 30 }}
               onClick={() => {
                 deleteItemFromCart(item?._id);
                 setRefetch((prevState) => prevState + 1);
@@ -105,13 +107,13 @@ export const CartProduct = ({
         </ProductDetail>
         <PriceDetail>
           <ProductAmountContainer>
-            <Add
-              style={{ cursor: "pointer" }}
+            <AiOutlinePlus
+              style={{ cursor: "pointer", fontSize: 25 }}
               onClick={() => setQuantity((prevState) => prevState + 1)}
             />
             <ProductAmount>{quantity}</ProductAmount>
-            <Remove
-              style={{ cursor: "pointer" }}
+            <AiOutlineMinus
+              style={{ cursor: "pointer", fontSize: 25 }}
               onClick={() => setQuantity((prevState) => prevState - 1)}
             />
           </ProductAmountContainer>

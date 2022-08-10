@@ -1,11 +1,11 @@
-import { Add, Remove } from "@material-ui/icons";
 import { useState } from "react";
 import styled from "styled-components";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-
 import { useAuth } from "../../context/AppProvider";
 import { mobile } from "../../responsive";
+import { AiOutlinePlus } from "react-icons/ai";
+import { AiOutlineMinus } from "react-icons/ai";
 
 const Wrapper = styled.div`
   padding: 50px;
@@ -168,13 +168,13 @@ export const ProductInfo = ({ product, productId }) => {
             </FilterContainer>
             <AddContainer>
               <AmountContainer>
-                <Remove
-                  style={{ cursor: "pointer" }}
+                <AiOutlineMinus
+                  style={{ cursor: "pointer", fontSize: 20 }}
                   onClick={() => setQuantity((prevState) => prevState - 1)}
                 />
                 <Amount>{quantity}</Amount>
-                <Add
-                  style={{ cursor: "pointer" }}
+                <AiOutlinePlus
+                  style={{ cursor: "pointer", fontSize: 20 }}
                   onClick={() => setQuantity((prevState) => prevState + 1)}
                 />
               </AmountContainer>

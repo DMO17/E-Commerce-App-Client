@@ -1,12 +1,11 @@
-import {
-  Facebook,
-  Instagram,
-  MailOutline,
-  Phone,
-  Pinterest,
-  Room,
-  Twitter,
-} from "@material-ui/icons";
+import { BsFacebook } from "react-icons/bs";
+import { BsInstagram } from "react-icons/bs";
+import { AiOutlineMail } from "react-icons/ai";
+import { AiFillPhone } from "react-icons/ai";
+import { BsPinterest } from "react-icons/bs";
+import { ImLocation2 } from "react-icons/im";
+import { FiTwitter } from "react-icons/fi";
+
 import styled from "styled-components";
 import { mobile } from "../../responsive";
 
@@ -87,7 +86,7 @@ export const Footer = () => {
   return (
     <Container>
       <Left>
-        <Logo>LAMA.</Logo>
+        <Logo>SHOP-FUN</Logo>
         <Desc>
           There are many variations of passages of Lorem Ipsum available, but
           the majority have suffered alteration in some form, by injected
@@ -95,16 +94,16 @@ export const Footer = () => {
         </Desc>
         <SocialContainer>
           <SocialIcon color="3B5999">
-            <Facebook />
+            <BsFacebook />
           </SocialIcon>
           <SocialIcon color="E4405F">
-            <Instagram />
+            <BsInstagram />
           </SocialIcon>
           <SocialIcon color="55ACEE">
-            <Twitter />
+            <FiTwitter />
           </SocialIcon>
           <SocialIcon color="E60023">
-            <Pinterest />
+            <BsPinterest />
           </SocialIcon>
         </SocialContainer>
       </Left>
@@ -126,14 +125,16 @@ export const Footer = () => {
       <Right>
         <Title>Contact</Title>
         <ContactItem>
-          <Room style={{ marginRight: "10px" }} /> 622 Dixie Path , South
-          Tobinchester 98336
+          <ImLocation2 style={{ marginRight: "10px", fontSize: 20 }} /> 622
+          Dixie Path , South Tobinchester 98336
         </ContactItem>
         <ContactItem>
-          <Phone style={{ marginRight: "10px" }} /> +1 234 56 78
+          <AiFillPhone style={{ marginRight: "10px", fontSize: 20 }} /> +1 234
+          56 78
         </ContactItem>
         <ContactItem>
-          <MailOutline style={{ marginRight: "10px" }} /> contact@lama.dev
+          <AiOutlineMail style={{ marginRight: "10px", fontSize: 20 }} />
+          contact@lama.dev
         </ContactItem>
         <Payment src="https://i.ibb.co/Qfvn4z6/payment.png" />
       </Right>

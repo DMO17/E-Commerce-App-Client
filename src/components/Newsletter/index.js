@@ -1,6 +1,6 @@
-import { Send } from "@material-ui/icons";
 import styled from "styled-components";
 import { mobile } from "../../responsive";
+import { AiOutlineSend } from "react-icons/ai";
 
 const Container = styled.div`
   height: 60vh;
@@ -53,7 +53,7 @@ export const Newsletter = () => {
       <InputContainer>
         <Input placeholder="Your email" />
         <Button>
-          <Send />
+          <AiOutlineSend />
         </Button>
       </InputContainer>
     </Container>
