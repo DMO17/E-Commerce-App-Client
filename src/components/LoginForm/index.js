@@ -79,7 +79,7 @@ export const LoginForm = () => {
     setLoading(true);
 
     const { data } = await axios.post(
-      "https://shop-fun-ecommerce-api.herokuapp.com/user/login",
+      "https://shop-fun-ecommerce-api.herokuapp.com/api/user/login",
       {
         email,
         password,

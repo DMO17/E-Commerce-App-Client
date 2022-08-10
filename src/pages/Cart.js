@@ -39,7 +39,7 @@ export const Cart = () => {
   useEffect(() => {
     const fetchCart = async () => {
       const { data } = await axios.get(
-        `https://shop-fun-ecommerce-api.herokuapp.com/cart/${user?._id}`,
+        `https://shop-fun-ecommerce-api.herokuapp.com/api/cart/${user?._id}`,
         {
           headers: { authorization: `Bearer ${accessToken}` },
         }
@@ -60,7 +60,7 @@ export const Cart = () => {
 
   const deleteItemFromCart = async (id) => {
     await axios.put(
-      `/cart/delete/${user?._id}`,
+      `https://shop-fun-ecommerce-api.herokuapp.com/api/cart/delete/${user?._id}`,
       { cartProductId: id },
       {
         headers: { authorization: `Bearer ${accessToken}` },

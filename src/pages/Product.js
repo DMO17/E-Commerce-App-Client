@@ -21,7 +21,7 @@ export const Product = () => {
   useEffect(() => {
     const fetchProductById = async () => {
       const { data } = await axios.get(
-        `https://shop-fun-ecommerce-api.herokuapp.com/products/${productId}`
+        `https://shop-fun-ecommerce-api.herokuapp.com/api/products/${productId}`
       );
 
       if (data?.success) {

@@ -29,7 +29,7 @@ export const Pay = ({ totalCartAmount }) => {
   useEffect(() => {
     const makeRequest = async () => {
       const { data } = await axios.post(
-        "https://shop-fun-ecommerce-api.herokuapp.com/order/payment",
+        "https://shop-fun-ecommerce-api.herokuapp.com/api//order/payment",
         {
           tokenId: stripeToken.id,
           amount: stripeAmount,
@@ -37,9 +37,9 @@ export const Pay = ({ totalCartAmount }) => {
       );
 
       const { data: orderData } = await axios.post(
-        "/order",
+        "https://shop-fun-ecommerce-api.herokuapp.com/api/order",
         {
-          address: `${data?.billing_details?.line1} ${data?.billing_details?.postal_code} ${data?.billing_details?.city} ${data?.billing_details?.country}`,
+          address: `${data?.payment?.billing_details?.line1} ${data?.payment?.billing_details?.postal_code} ${data?.payment?.billing_details?.city} ${data?.payment?.billing_details?.country}`,
           amount: totalCartAmount,
           userId: user?._id,
         },

@@ -123,7 +123,7 @@ export const ProductInfo = ({ product, productId }) => {
     if (user) {
       if (!itExists) {
         const { data } = await axios.put(
-          `https://shop-fun-ecommerce-api.herokuapp.com/cart/${user?._id}`,
+          `https://shop-fun-ecommerce-api.herokuapp.com/api/cart/${user?._id}`,
           {
             size,
             productId,
