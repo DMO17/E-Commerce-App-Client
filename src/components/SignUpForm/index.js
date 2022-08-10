@@ -88,7 +88,7 @@ export const SignUpForm = () => {
       setLoading(true);
 
       const { data } = await axios.post(
-        "https://shop-fun-ecommerce-api.herokuapp.com/api/user/sign-up",
+        "https://shop-fun-ecommerce-api.herokuapp.com/api/user/register",
         {
           firstName,
           lastName,
