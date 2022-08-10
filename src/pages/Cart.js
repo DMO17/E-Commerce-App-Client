@@ -38,9 +38,12 @@ export const Cart = () => {
 
   useEffect(() => {
     const fetchCart = async () => {
-      const { data } = await axios.get(`/cart/${user?._id}`, {
-        headers: { authorization: `Bearer ${accessToken}` },
-      });
+      const { data } = await axios.get(
+        `https://shop-fun-ecommerce-api.herokuapp.com/cart/${user?._id}`,
+        {
+          headers: { authorization: `Bearer ${accessToken}` },
+        }
+      );
 
       if (data?.success) {
         setCart(data?.cart);
@@ -68,7 +71,6 @@ export const Cart = () => {
   const navigateToProductOnClick = (id) => {
     navigate(`../products/${id}`, { replace: true });
   };
-  const stripeAmount = totalCartAmount * 100;
 
   return (
     <Container>

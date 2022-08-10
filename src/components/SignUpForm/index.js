@@ -87,13 +87,16 @@ export const SignUpForm = () => {
     } else {
       setLoading(true);
 
-      const { data } = await axios.post("/user/sign-up", {
-        firstName,
-        lastName,
-        username,
-        email,
-        password,
-      });
+      const { data } = await axios.post(
+        "https://shop-fun-ecommerce-api.herokuapp.com/user/sign-up",
+        {
+          firstName,
+          lastName,
+          username,
+          email,
+          password,
+        }
+      );
 
       if (data.success && data) {
         data.success && navigate("../login", { replace: true });

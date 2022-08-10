@@ -78,10 +78,13 @@ export const LoginForm = () => {
   const onSubmit = async ({ email, password }) => {
     setLoading(true);
 
-    const { data } = await axios.post("/user/login", {
-      email,
-      password,
-    });
+    const { data } = await axios.post(
+      "https://shop-fun-ecommerce-api.herokuapp.com/user/login",
+      {
+        email,
+        password,
+      }
+    );
 
     if (data.success) {
       setAccessToken(data.accessToken);

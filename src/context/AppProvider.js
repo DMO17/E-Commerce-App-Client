@@ -18,7 +18,9 @@ export const AppProvider = ({ children }) => {
 
   useEffect(() => {
     const fetchProducts = async () => {
-      const { data } = await axios.get("/products");
+      const { data } = await axios.get(
+        "https://shop-fun-ecommerce-api.herokuapp.com/api/products"
+      );
 
       if (data?.products) {
         setAllProducts(data?.products);
