@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import { mobile, tablet } from "../../responsive";
 import Badge from "@material-ui/core/Badge";
+import { FiLogOut } from "react-icons/fi";
 import { Search, ShoppingCartOutlined } from "@material-ui/icons";
 import { useAuth } from "../../context/AppProvider";
 import { useNavigate } from "react-router-dom";
@@ -69,9 +70,16 @@ const MenuItem = styled.div`
 `;
 
 export const NavBar = () => {
-  const { isLoggedIn } = useAuth();
+  const { isLoggedIn, setIsLoggedIn, productsInCart } = useAuth();
 
   const navigate = useNavigate();
+
+  const onClickLogOut = () => {
+    localStorage.removeItem("user");
+    localStorage.removeItem("token");
+    setIsLoggedIn(false);
+    navigate("../", { replace: true });
+  };
 
   return (
     <Container>
@@ -102,11 +110,21 @@ export const NavBar = () => {
             </>
           )}
           {isLoggedIn && (
-            <MenuItem onClick={() => navigate("../cart", { replace: true })}>
-              <Badge overlap="rectangular" badgeContent={4} color="primary">
-                <ShoppingCartOutlined />
-              </Badge>
-            </MenuItem>
+            <>
+              <MenuItem onClick={() => navigate("../cart", { replace: true })}>
+                <Badge
+                  overlap="rectangular"
+                  badgeContent={productsInCart.length}
+                  color="primary"
+                >
+                  <ShoppingCartOutlined />
+                </Badge>
+              </MenuItem>
+              <FiLogOut
+                style={{ fontSize: 30, marginLeft: 25, cursor: "pointer" }}
+                onClick={() => onClickLogOut()}
+              />
+            </>
           )}
         </Right>
       </Wrapper>

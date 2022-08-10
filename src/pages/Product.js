@@ -21,8 +21,12 @@ export const Product = () => {
   useEffect(() => {
     const fetchProductById = async () => {
       const { data } = await axios.get(`/products/${productId}`);
-      data?.success && setProduct(data.product);
-      !data?.success && setError(true);
+
+      if (data?.success) {
+        setProduct(data.product);
+      } else {
+        setError(true);
+      }
     };
 
     fetchProductById();

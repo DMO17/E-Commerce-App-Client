@@ -27,12 +27,13 @@ const SummaryItemText = styled.span``;
 const SummaryItemPrice = styled.span``;
 
 export const CartSummary = ({ totalCartAmount }) => {
+  const totalCost = totalCartAmount?.toFixed(2);
   return (
     <Summary>
       <SummaryTitle>ORDER SUMMARY</SummaryTitle>
       <SummaryItem>
         <SummaryItemText>Subtotal</SummaryItemText>
-        <SummaryItemPrice>£ {totalCartAmount}</SummaryItemPrice>
+        <SummaryItemPrice>£ {totalCost}</SummaryItemPrice>
       </SummaryItem>
       <SummaryItem>
         <SummaryItemText>Estimated Shipping</SummaryItemText>
@@ -44,9 +45,9 @@ export const CartSummary = ({ totalCartAmount }) => {
       </SummaryItem>
       <SummaryItem type="total">
         <SummaryItemText>Total</SummaryItemText>
-        <SummaryItemPrice>£ {totalCartAmount}</SummaryItemPrice>
+        <SummaryItemPrice>£ {totalCost}</SummaryItemPrice>
       </SummaryItem>
-      <Pay totalCartAmount={totalCartAmount} />
+      <Pay totalCartAmount={totalCost} />
     </Summary>
   );
 };

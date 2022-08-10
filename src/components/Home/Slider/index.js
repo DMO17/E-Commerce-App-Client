@@ -1,4 +1,6 @@
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
+import { useAuth } from "../../../context/AppProvider";
 import { sliderItems } from "../../../data";
 import { tablet } from "../../../responsive";
 
@@ -60,6 +62,12 @@ const Button = styled.button`
 `;
 
 export const Slider = () => {
+  const { filterProducts } = useAuth();
+  const navigate = useNavigate();
+  const navigateToProductsPage = () => {
+    filterProducts("All Products");
+    navigate("../products", { replace: true });
+  };
   return (
     <Container>
       <Wrapper>
@@ -70,7 +78,7 @@ export const Slider = () => {
           <InfoContainer>
             <Title>{sliderItems[0].title}</Title>
             <Desc>{sliderItems[0].desc}</Desc>
-            <Button>SHOW NOW</Button>
+            <Button onClick={() => navigateToProductsPage()}>SHOW NOW</Button>
           </InfoContainer>
         </Slide>
       </Wrapper>

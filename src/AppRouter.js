@@ -17,8 +17,6 @@ export const AppRouter = () => {
         <>
           <Route path="/pay" element={<Pay />} />;
           <Route path="/success" element={<Success />} />;
-          <Route path="/login" element={<LoginForm />} />;
-          <Route path="/register" element={<SignUp />} />;
           <Route path="/cart" element={<Cart />} />;
           <Route path="/products/:productId" element={<Product />} />;
           <Route path="/products" element={<ProductList />} />;

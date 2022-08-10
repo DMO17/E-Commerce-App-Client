@@ -17,6 +17,7 @@ const ProductDetail = styled.div`
 const Image = styled.img`
   width: 200px;
   height: 200px;
+  cursor: pointer;
 `;
 
 const Details = styled.div`
@@ -69,14 +70,22 @@ const Hr = styled.hr`
   height: 1px;
 `;
 
-export const CartProduct = ({ item, deleteItemFromCart, setRefetch }) => {
+export const CartProduct = ({
+  item,
+  deleteItemFromCart,
+  setRefetch,
+  navigateToProductOnClick,
+}) => {
   const [quantity, setQuantity] = useState(item?.quantity);
 
   return (
     <Fragment>
       <Product>
         <ProductDetail>
-          <Image src={item?.productId?.img} />
+          <Image
+            src={item?.productId?.img}
+            onClick={() => navigateToProductOnClick(item?.productId?._id)}
+          />
           <Details>
             <Delete
               style={{ cursor: "pointer" }}

@@ -105,26 +105,36 @@ const Button = styled.button`
 `;
 
 export const ProductInfo = ({ product, productId }) => {
-  const { user, accessToken } = useAuth();
+  const { user, accessToken, productsInCart } = useAuth();
   const navigate = useNavigate();
 
   const [size, setSize] = useState("XS");
   const [quantity, setQuantity] = useState(1);
 
+  const checkIfProductInCart = (cartProducts) =>
+    cartProducts?.some(
+      (product) =>
+        product?.productId?._id === productId && product?.size === size
+    );
+
+  const itExists = checkIfProductInCart(productsInCart);
+
   const addProductToCart = async () => {
     if (user) {
-      const { data } = await axios.put(
-        `/cart/${user?._id}`,
-        {
-          size,
-          productId,
-          quantity,
-        },
-        {
-          headers: { authorization: `Bearer ${accessToken}` },
-        }
-      );
-      data.success && navigate("../cart", { replace: true });
+      if (!itExists) {
+        const { data } = await axios.put(
+          `/cart/${user?._id}`,
+          {
+            size,
+            productId,
+            quantity,
+          },
+          {
+            headers: { authorization: `Bearer ${accessToken}` },
+          }
+        );
+        data.success && navigate("../cart", { replace: true });
+      }
     } else navigate("../login", { replace: true });
   };
 
@@ -137,36 +147,49 @@ export const ProductInfo = ({ product, productId }) => {
         <Title>{product?.title}</Title>
         <Desc>{product?.description}</Desc>
         <Price>$ {product?.price}</Price>
-        <FilterContainer>
-          <Filter>
-            <FilterTitle>Size</FilterTitle>
-            <FilterSize
-              onChange={(e) => {
-                setSize(e.target.value);
-              }}
-            >
-              <FilterSizeOption>XS</FilterSizeOption>
-              <FilterSizeOption>S</FilterSizeOption>
-              <FilterSizeOption>M</FilterSizeOption>
-              <FilterSizeOption>L</FilterSizeOption>
-              <FilterSizeOption>XL</FilterSizeOption>
-            </FilterSize>
-          </Filter>
-        </FilterContainer>
-        <AddContainer>
-          <AmountContainer>
-            <Remove
-              style={{ cursor: "pointer" }}
-              onClick={() => setQuantity((prevState) => prevState - 1)}
-            />
-            <Amount>{quantity}</Amount>
-            <Add
-              style={{ cursor: "pointer" }}
-              onClick={() => setQuantity((prevState) => prevState + 1)}
-            />
-          </AmountContainer>
-          <Button onClick={addProductToCart}>ADD TO CART</Button>
-        </AddContainer>
+        {product?.inStock ? (
+          <>
+            {" "}
+            <FilterContainer>
+              <Filter>
+                <FilterTitle>Size</FilterTitle>
+                <FilterSize
+                  onChange={(e) => {
+                    setSize(e.target.value);
+                  }}
+                >
+                  <FilterSizeOption>XS</FilterSizeOption>
+                  <FilterSizeOption>S</FilterSizeOption>
+                  <FilterSizeOption>M</FilterSizeOption>
+                  <FilterSizeOption>L</FilterSizeOption>
+                  <FilterSizeOption>XL</FilterSizeOption>
+                </FilterSize>
+              </Filter>
+            </FilterContainer>
+            <AddContainer>
+              <AmountContainer>
+                <Remove
+                  style={{ cursor: "pointer" }}
+                  onClick={() => setQuantity((prevState) => prevState - 1)}
+                />
+                <Amount>{quantity}</Amount>
+                <Add
+                  style={{ cursor: "pointer" }}
+                  onClick={() => setQuantity((prevState) => prevState + 1)}
+                />
+              </AmountContainer>
+              <Button onClick={addProductToCart}>ADD TO CART</Button>
+            </AddContainer>
+          </>
+        ) : (
+          <Title>PRODUCT IS OUT OF STOCK</Title>
+        )}
+
+        {itExists && (
+          <h4 style={{ marginTop: 5 }}>
+            Product with this size:{size} is in your cart
+          </h4>
+        )}
       </InfoContainer>
     </Wrapper>
   );

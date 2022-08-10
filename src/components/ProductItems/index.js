@@ -1,5 +1,6 @@
 import { Fragment } from "react";
 import styled from "styled-components";
+import { useAuth } from "../../context/AppProvider";
 import { mobile } from "../../responsive";
 import { Products } from "../Products";
 
@@ -25,30 +26,38 @@ const Select = styled.select`
   margin-right: 20px;
   ${mobile({ margin: "10px 0px" })}
 `;
+
 const Option = styled.option``;
 export const ProductItems = () => {
+  const { filterProducts, type } = useAuth();
+
+  const productTypeFilter = (e) => {
+    filterProducts(e.target.value);
+  };
+
+  const productPriceFilter = (e) => {
+    filterProducts(null, e.target.value);
+  };
+
   return (
     <Fragment>
       <FilterContainer>
         <Filter>
           <FilterText>Filter Products:</FilterText>
-          <Select>
-            <Option disabled selected>
-              type
-            </Option>
+          <Select onChange={productTypeFilter} defaultValue={type}>
+            <Option disabled>type</Option>
+            <Option>All Products</Option>
             <Option>Men</Option>
             <Option>Women</Option>
             <Option>Kids</Option>
           </Select>
         </Filter>
         <Filter>
-          <FilterText>Sort Products:</FilterText>
-          <Select>
-            <Option disabled selected>
-              price
-            </Option>
-            <Option>Price (asc)</Option>
-            <Option>Price (desc)</Option>
+          <FilterText>Sort Price:</FilterText>
+          <Select defaultValue="asc" onChange={productPriceFilter}>
+            <Option disabled>price</Option>
+            <Option>asc</Option>
+            <Option>desc</Option>
           </Select>
         </Filter>
       </FilterContainer>

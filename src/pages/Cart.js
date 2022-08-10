@@ -9,6 +9,7 @@ import { CartSummary } from "../components/Cart/CartSummary";
 import { Footer } from "../components/Footer";
 
 import { tablet } from "../responsive";
+import { useNavigate } from "react-router-dom";
 
 const Container = styled.div``;
 
@@ -28,23 +29,27 @@ const Info = styled.div`
 `;
 
 export const Cart = () => {
-  const { user, accessToken } = useAuth();
+  const { user, accessToken, setProductInCart } = useAuth();
 
   const [cart, setCart] = useState([]);
   const [refetch, setRefetch] = useState(2);
+
+  let navigate = useNavigate();
 
   useEffect(() => {
     const fetchCart = async () => {
       const { data } = await axios.get(`/cart/${user?._id}`, {
         headers: { authorization: `Bearer ${accessToken}` },
       });
-      data?.success && setCart(data?.cart);
+
+      if (data?.success) {
+        setCart(data?.cart);
+        setProductInCart(data?.cart?.products);
+      }
     };
 
     fetchCart();
-  }, [user?._id, accessToken, refetch]);
-
-  console.log(refetch);
+  }, [user?._id, accessToken, refetch, setProductInCart]);
 
   const totalCartAmount = Object.values(cart)[2]?.reduce((total, item) => {
     return item?.quantity * item?.productId?.price + total;
@@ -60,6 +65,11 @@ export const Cart = () => {
     );
   };
 
+  const navigateToProductOnClick = (id) => {
+    navigate(`../products/${id}`, { replace: true });
+  };
+  const stripeAmount = totalCartAmount * 100;
+
   return (
     <Container>
       <Wrapper>
@@ -71,6 +81,7 @@ export const Cart = () => {
                 item={item}
                 deleteItemFromCart={deleteItemFromCart}
                 setRefetch={setRefetch}
+                navigateToProductOnClick={navigateToProductOnClick}
                 key={item?._id}
               />
             ))}

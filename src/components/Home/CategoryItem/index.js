@@ -41,13 +41,13 @@ const Button = styled.button`
   font-weight: 600;
 `;
 
-export const CategoryItem = ({ item }) => {
+export const CategoryItem = ({ item, navigateToCategory }) => {
   return (
     <Container>
-      <Image src={item.img} />
+      <Image src={item?.img} />
       <Info>
-        <Title>{item.title}</Title>
-        <Button>SHOP NOW</Button>
+        <Title>{item?.title}</Title>
+        <Button onClick={() => navigateToCategory(item?.type)}>SHOP NOW</Button>
       </Info>
     </Container>
   );
